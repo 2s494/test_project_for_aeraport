@@ -12,10 +12,10 @@ class DeparturePage extends StatefulWidget {
 class _DeparturePageState extends State<DeparturePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(builder: (context,state){
-      if(state is DepartureLoadedState){
+    return BlocBuilder<BlocBloc,BlocState>(builder: (context,state){
+      // if(state is DepartureLoadedState){
         
-      }
+      // }
       return const SizedBox.shrink();
     });
   }

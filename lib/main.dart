@@ -9,9 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 Future<void> main() async {
   await setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  final result = await locator<RemoteDataSource>().get(url: "DEPARTURE");
-  final afterParse = parseFlights(result);
-  debugPrint(afterParse.toString());
+  // final result = await locator<RemoteDataSource>().get(url: "DEPARTURE");
+  runApp(const MainWidget());
 }
 
 class MainWidget extends StatelessWidget {

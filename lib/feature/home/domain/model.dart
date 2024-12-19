@@ -1,5 +1,7 @@
 List<Flight> parseFlights(final response) {
-  return (response.data['flights'] as List).map((json) => Flight.fromJson(json)).toList();
+  return (response.data['flights'] as List)
+      .map((json) => Flight.fromJson(json))
+      .toList();
 }
 
 class Flight {
@@ -68,6 +70,10 @@ class Flight {
         checkIn: CheckIn.fromJson(json["check_in"]),
         gate: Gate.toJson(json["gate"]));
   }
+  @override
+  String toString() {
+    return " $aircompany $flightNumber $letter $aircraftType $codeShares $sched $plan $fact $estimated $airport $cityCode $city $terminal $country $movement $flightStatus $fidsStatusTime $checkIn $boarding $gate";
+  }
 }
 
 class CheckIn {
@@ -96,6 +102,10 @@ class CheckIn {
         factBegin: json["fact_begin"],
         factEnd: json["fact_end"],
         status: json["status"]);
+  }
+  @override
+  String toString() {
+    return " $plan $fact $planBegin $planEnd $factBegin $factEnd $status";
   }
 }
 
@@ -126,6 +136,10 @@ class Gate {
         factEnd: json["fact_end"],
         status: json["status"]);
   }
+  @override
+  String toString() {
+    return " $plan $fact $planEnd $planBegin $factBegin $factEnd $status";
+  }
 }
 
 class Boarding {
@@ -150,5 +164,9 @@ class Boarding {
         factBegin: json["fact_begin"],
         factEnd: json["fact_end"],
         status: json["status"]);
+  }
+  @override
+  String toString() {
+    return " $planBegin $planEnd $factBegin $factEnd $status";
   }
 }
