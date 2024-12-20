@@ -1,10 +1,10 @@
-List<Flight> parseFlights(final response) {
+List<ArrivalFlight> parseFlightsForArrivale(final response) {
   return (response.data['flights'] as List)
-      .map((json) => Flight.fromJson(json))
+      .map((json) => ArrivalFlight.fromJson(json))
       .toList();
 }
 
-class Flight {
+class ArrivalFlight {
   String aircompany;
   String flightNumber;
   String letter;
@@ -22,11 +22,9 @@ class Flight {
   String movement;
   String flightStatus;
   String fidsStatusTime;
-  CheckIn checkIn;
-  Gate gate;
-  Boarding boarding;
+  Baggage baggage;
 
-  Flight(
+  ArrivalFlight(
       {required this.aircompany,
       required this.flightNumber,
       required this.letter,
@@ -44,11 +42,10 @@ class Flight {
       required this.movement,
       required this.flightStatus,
       required this.fidsStatusTime,
-      required this.boarding,
-      required this.checkIn,
-      required this.gate});
-  factory Flight.fromJson(Map<String, dynamic> json) {
-    return Flight(
+      required this.baggage,
+     });
+  factory ArrivalFlight.fromJson(Map<String, dynamic> json) {
+    return ArrivalFlight(
         aircompany: json["aircompany"],
         flightNumber: json["flightnumber"],
         letter: json["letter"],
@@ -66,17 +63,15 @@ class Flight {
         movement: json["movement"],
         flightStatus: json["flight_status"],
         fidsStatusTime: json["fids_status_time"],
-        boarding: Boarding.toJson(json["boarding"]),
-        checkIn: CheckIn.fromJson(json["check_in"]),
-        gate: Gate.toJson(json["gate"]));
+        baggage: Baggage.fromJson(json["baggage"]));
   }
   @override
   String toString() {
-    return " $aircompany $flightNumber $letter $aircraftType $codeShares $sched $plan $fact $estimated $airport $cityCode $city $terminal $country $movement $flightStatus $fidsStatusTime $checkIn $boarding $gate";
+    return " $aircompany $flightNumber $letter $aircraftType $codeShares $sched $plan $fact $estimated $airport $cityCode $city $terminal $country $movement $flightStatus $fidsStatusTime $Baggage ";
   }
 }
 
-class CheckIn {
+class Baggage {
   String plan;
   String fact;
   String planBegin;
@@ -84,7 +79,7 @@ class CheckIn {
   String factBegin;
   String factEnd;
   String status;
-  CheckIn({
+  Baggage({
     required this.plan,
     required this.fact,
     required this.planBegin,
@@ -93,8 +88,8 @@ class CheckIn {
     required this.factEnd,
     required this.status,
   });
-  factory CheckIn.fromJson(Map<String, dynamic> json) {
-    return CheckIn(
+  factory Baggage.fromJson(Map<String, dynamic> json) {
+    return Baggage(
         plan: json["plan"],
         fact: json["fact"],
         planBegin: json["plan_begin"],
@@ -106,67 +101,5 @@ class CheckIn {
   @override
   String toString() {
     return " $plan $fact $planBegin $planEnd $factBegin $factEnd $status";
-  }
-}
-
-class Gate {
-  String plan;
-  String fact;
-  String planEnd;
-  String planBegin;
-  String factBegin;
-  String factEnd;
-  String status;
-  Gate({
-    required this.planBegin,
-    required this.plan,
-    required this.fact,
-    required this.planEnd,
-    required this.factBegin,
-    required this.factEnd,
-    required this.status,
-  });
-  factory Gate.toJson(Map<String, dynamic> json) {
-    return Gate(
-        plan: json["plan"],
-        fact: json["fact"],
-        planBegin: json["plan_begin"],
-        planEnd: json["plan_end"],
-        factBegin: json["fact_begin"],
-        factEnd: json["fact_end"],
-        status: json["status"]);
-  }
-  @override
-  String toString() {
-    return " $plan $fact $planEnd $planBegin $factBegin $factEnd $status";
-  }
-}
-
-class Boarding {
-  String planBegin;
-  String planEnd;
-  String factBegin;
-  String factEnd;
-  String status;
-
-  Boarding({
-    required this.planBegin,
-    required this.planEnd,
-    required this.factBegin,
-    required this.factEnd,
-    required this.status,
-  });
-
-  factory Boarding.toJson(Map<String, dynamic> json) {
-    return Boarding(
-        planBegin: json["plan_begin"],
-        planEnd: json["plan_end"],
-        factBegin: json["fact_begin"],
-        factEnd: json["fact_end"],
-        status: json["status"]);
-  }
-  @override
-  String toString() {
-    return " $planBegin $planEnd $factBegin $factEnd $status";
   }
 }

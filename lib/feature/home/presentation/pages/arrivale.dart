@@ -1,21 +1,21 @@
 import 'package:flight_schedule/feature/home/presentation/bloc/bloc_bloc.dart';
-import 'package:flight_schedule/feature/home/presentation/pages/departure_info.dart';
+import 'package:flight_schedule/feature/home/presentation/pages/arrivale_info.dart';
 import 'package:flight_schedule/feature/home/presentation/widgets/time_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DeparturePage extends StatefulWidget {
-  const DeparturePage({super.key});
+class ArrivalePage extends StatefulWidget {
+  const ArrivalePage({super.key});
 
   @override
-  State<DeparturePage> createState() => _DeparturePageState();
+  State<ArrivalePage> createState() => _ArrivalePageState();
 }
 
-class _DeparturePageState extends State<DeparturePage> {
+class _ArrivalePageState extends State<ArrivalePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BlocBloc>(
-      create: (context) => BlocBloc()..add(DepartureEvent()),
+      create: (context) => BlocBloc()..add(ArrivalEvent()),
       child: BlocBuilder<BlocBloc, BlocState>(builder: (context, state) {
         if (state is LoadingState) {
           return const Center(
@@ -23,8 +23,7 @@ class _DeparturePageState extends State<DeparturePage> {
           );
         }
 
-        if (state is DepartureLoadedState) {
-
+        if (state is ArrivalLoadedState) {
           return ListView.builder(
               itemCount: state.listOfFlights?.length ?? 0,
               itemBuilder: (context, index) {
@@ -34,7 +33,7 @@ class _DeparturePageState extends State<DeparturePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DepartureInfo(
+                              builder: (context) => ArrivalInfo(
                                   flight: state.listOfFlights?[index])));
                     },
                     title: Text(
@@ -55,7 +54,6 @@ class _DeparturePageState extends State<DeparturePage> {
                   ),
                 );
               });
-              
         }
         return const SizedBox.shrink();
       }),

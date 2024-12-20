@@ -4,3 +4,12 @@ part of 'bloc_bloc.dart';
   @override
   List<Object?> get props => [];
  }
+
+class DepartureEvent extends BlocEvent{
+   @override
+  List<Object?> get props => [];
+}
+class ArrivalEvent extends BlocEvent{
+   @override
+  List<Object?> get props => [];
+}
